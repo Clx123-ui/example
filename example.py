@@ -11,14 +11,14 @@ model = ChatOpenAI(
     base_url='https://api.deepseek.com/',
     model='deepseek-reasoner',
     temperature=0,
-    api_key=st.secrets["OPENAI_API_KEY"]  # 修改为使用st.secrets
+    openai_api_key=st.secrets["OPENAI_API_KEY"]  # 修改为使用st.secrets
 )
 
 def get_answer(question: str, strict_file_mode: bool = False):
     try:
         client = OpenAI(
             base_url='https://api.deepseek.com',
-            api_key=st.secrets["OPENAI_API_KEY"]  # 修改为使用st.secrets
+            openai_api_key=st.secrets["OPENAI_API_KEY"]  # 修改为使用st.secrets
         )
 
         messages = []
