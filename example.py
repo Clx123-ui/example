@@ -38,7 +38,7 @@ def get_answer(question: str, strict_file_mode: bool = False):
             model='deepseek-reasoner',
             messages=messages,
             temperature=0,
-            max_tokens=1024
+            max_tokens=2048
         )
 
         return response.choices[0].message.content
@@ -84,7 +84,7 @@ def load_file(uploaded_file):
 
 # 初始化会话状态
 if 'messages' not in st.session_state:
-    st.session_state['messages'] = [('ai', '(ฅฅ´ω`ฅฅ)你好，我是你的AI助手晓生，为你解决所有问题')]
+    st.session_state['messages'] = [('🐯', '(ฅฅ´ω`ฅฅ)你好，我是你的AI助手晓生，为你解决所有问题')]
 if 'file_content' not in st.session_state:
     st.session_state['file_content'] = ""
 if 'strict_file_mode' not in st.session_state:
@@ -119,16 +119,16 @@ with st.sidebar:
                 st.session_state['file_content'] = ""
             else:
                 st.session_state['file_content'] = file_content
-                st.success("文件解析完成！")
-                st.text_area("文件内容预览",
+                st.success("✅文件解析完成！")
+                st.text_area("📝文件内容预览",
                              value=file_content[:1000] + ("..." if len(file_content) > 1000 else ""),
                              height=200)
 
     st.title('对话管理')
 
     # 清空所有对话按钮
-    if st.button('🗑️ 清空所有对话'):
-        st.session_state['messages'] = [('ai', '(ฅ´ω`ฅ)对话历史已清空，请问我新的问题吧')]
+    if st.button('🔄 清空所有对话'):
+        st.session_state['messages'] = [('🐯', '(ฅ´ω`ฅ)对话历史已清空，请问我新的问题吧')]
         st.rerun()
 
     st.divider()
@@ -166,5 +166,5 @@ if user_input:
             user_input,
             strict_file_mode=st.session_state['strict_file_mode']
         )
-        st.chat_message('ai').write(answer)
-        st.session_state['messages'].append(('ai', answer))
+        st.chat_message('🐯').write(answer)
+        st.session_state['messages'].append(('🐯', answer))
